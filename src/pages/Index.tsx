@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
 import Icon from "@/components/ui/icon";
@@ -5,6 +6,7 @@ import Icon from "@/components/ui/icon";
 export default function Index() {
   const navigate = useNavigate();
   const { openCart, count } = useCart();
+  const [search, setSearch] = useState("");
   return (
     <>
       <div className="grain-overlay" />
@@ -73,6 +75,53 @@ export default function Index() {
               </button>
               <button className="btn-cta" style={{ background: "white" }} onClick={() => navigate("/catalog")}>
                 Смотреть каталог
+              </button>
+            </div>
+
+            <div style={{ marginTop: "24px", display: "flex", alignItems: "center", border: "var(--border)", background: "white", maxWidth: "480px" }}>
+              <span style={{ padding: "0 14px", display: "flex", alignItems: "center", color: "#999" }}>
+                <Icon name="Search" size={18} />
+              </span>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
+                placeholder="Найти чай... например, пуэр или матча"
+                style={{
+                  flex: 1,
+                  border: "none",
+                  outline: "none",
+                  padding: "14px 0",
+                  fontSize: "15px",
+                  background: "transparent",
+                  fontFamily: "inherit",
+                }}
+              />
+              {search && (
+                <button
+                  onClick={() => setSearch("")}
+                  style={{ padding: "0 14px", background: "none", border: "none", cursor: "pointer", color: "#999" }}
+                >
+                  <Icon name="X" size={16} />
+                </button>
+              )}
+              <button
+                onClick={() => search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
+                style={{
+                  padding: "14px 20px",
+                  background: "var(--dark)",
+                  color: "white",
+                  border: "none",
+                  cursor: "pointer",
+                  fontWeight: 800,
+                  fontSize: "13px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  fontFamily: "inherit",
+                }}
+              >
+                Найти
               </button>
             </div>
           </div>

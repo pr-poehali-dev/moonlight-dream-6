@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import Icon from "@/components/ui/icon";
 import { useCart } from "@/context/CartContext";
 
@@ -274,10 +274,23 @@ const products = [
 
 export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState("puer");
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
   const { openCart, count, addItem } = useCart();
 
-  const filtered = products.filter((p) => p.category === activeCategory);
+  useEffect(() => {
+    const q = new URLSearchParams(location.search).get("q") || "";
+    setSearchQuery(q);
+  }, [location.search]);
+
+  const filtered = searchQuery
+    ? products.filter((p) =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : products.filter((p) => p.category === activeCategory);
 
   return (
     <>
