@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
+import Icon from "@/components/ui/icon";
 
 export default function Index() {
   const navigate = useNavigate();
+  const { openCart, count } = useCart();
   return (
     <>
       <div className="grain-overlay" />
@@ -14,7 +17,43 @@ export default function Index() {
           <a href="#">Доставка</a>
           <a href="#">Магазин</a>
         </nav>
-        <button className="btn-cta">Заказать</button>
+        <button
+          onClick={openCart}
+          style={{
+            position: "relative",
+            background: "none",
+            border: "var(--border)",
+            cursor: "pointer",
+            width: "44px",
+            height: "44px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon name="ShoppingCart" size={20} />
+          {count > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-8px",
+                background: "var(--primary)",
+                color: "white",
+                borderRadius: "50%",
+                width: "20px",
+                height: "20px",
+                fontSize: "11px",
+                fontWeight: 800,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {count}
+            </span>
+          )}
+        </button>
       </header>
 
       <main>

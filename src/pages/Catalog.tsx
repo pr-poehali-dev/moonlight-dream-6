@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Icon from "@/components/ui/icon";
+import { useCart } from "@/context/CartContext";
 
 const categories = [
   { id: "puer", label: "Пуэр" },
@@ -274,6 +275,7 @@ const products = [
 export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState("puer");
   const navigate = useNavigate();
+  const { openCart, count, addItem } = useCart();
 
   const filtered = products.filter((p) => p.category === activeCategory);
 
@@ -289,7 +291,43 @@ export default function Catalog() {
           <a href="#">Доставка</a>
           <a href="#">Магазин</a>
         </nav>
-        <button className="btn-cta">Заказать</button>
+        <button
+          onClick={openCart}
+          style={{
+            position: "relative",
+            background: "none",
+            border: "var(--border)",
+            cursor: "pointer",
+            width: "44px",
+            height: "44px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon name="ShoppingCart" size={20} />
+          {count > 0 && (
+            <span
+              style={{
+                position: "absolute",
+                top: "-8px",
+                right: "-8px",
+                background: "var(--primary)",
+                color: "white",
+                borderRadius: "50%",
+                width: "20px",
+                height: "20px",
+                fontSize: "11px",
+                fontWeight: 800,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              {count}
+            </span>
+          )}
+        </button>
       </header>
 
       <main>
@@ -405,6 +443,7 @@ export default function Catalog() {
                       <button
                         className="btn-cta"
                         style={{ width: "100%", background: "var(--primary)", color: "white" }}
+                        onClick={() => addItem({ id: product.id, name: product.name, price: product.price, img: product.img })}
                       >
                         В корзину
                       </button>
