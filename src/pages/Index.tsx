@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Index() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="grain-overlay" />
@@ -29,7 +32,7 @@ export default function Index() {
               <button className="btn-cta" style={{ background: "var(--primary)", color: "white" }}>
                 Заказать с доставкой
               </button>
-              <button className="btn-cta" style={{ background: "white" }}>
+              <button className="btn-cta" style={{ background: "white" }} onClick={() => navigate("/catalog")}>
                 Смотреть каталог
               </button>
             </div>
