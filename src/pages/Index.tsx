@@ -13,6 +13,52 @@ export default function Index() {
 
       <header className="header">
         <div className="logo">ПУЭРчик</div>
+        <div style={{ display: "flex", alignItems: "center", border: "var(--border)", background: "white", flex: 1, maxWidth: "400px", margin: "0 24px" }}>
+          <span style={{ padding: "0 12px", display: "flex", alignItems: "center", color: "#999" }}>
+            <Icon name="Search" size={16} />
+          </span>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
+            placeholder="Найти чай..."
+            style={{
+              flex: 1,
+              border: "none",
+              outline: "none",
+              padding: "10px 0",
+              fontSize: "14px",
+              background: "transparent",
+              fontFamily: "inherit",
+            }}
+          />
+          {search && (
+            <button
+              onClick={() => setSearch("")}
+              style={{ padding: "0 10px", background: "none", border: "none", cursor: "pointer", color: "#999" }}
+            >
+              <Icon name="X" size={14} />
+            </button>
+          )}
+          <button
+            onClick={() => search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
+            style={{
+              padding: "10px 16px",
+              background: "var(--dark)",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+              fontWeight: 800,
+              fontSize: "12px",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              fontFamily: "inherit",
+            }}
+          >
+            Найти
+          </button>
+        </div>
         <nav>
           <a href="#">Чай</a>
           <a href="#">О нас</a>
@@ -78,52 +124,7 @@ export default function Index() {
               </button>
             </div>
 
-            <div style={{ marginTop: "24px", display: "flex", alignItems: "center", border: "var(--border)", background: "white", maxWidth: "480px" }}>
-              <span style={{ padding: "0 14px", display: "flex", alignItems: "center", color: "#999" }}>
-                <Icon name="Search" size={18} />
-              </span>
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
-                placeholder="Найти чай... например, пуэр или матча"
-                style={{
-                  flex: 1,
-                  border: "none",
-                  outline: "none",
-                  padding: "14px 0",
-                  fontSize: "15px",
-                  background: "transparent",
-                  fontFamily: "inherit",
-                }}
-              />
-              {search && (
-                <button
-                  onClick={() => setSearch("")}
-                  style={{ padding: "0 14px", background: "none", border: "none", cursor: "pointer", color: "#999" }}
-                >
-                  <Icon name="X" size={16} />
-                </button>
-              )}
-              <button
-                onClick={() => search.trim() && navigate(`/catalog?q=${encodeURIComponent(search.trim())}`)}
-                style={{
-                  padding: "14px 20px",
-                  background: "var(--dark)",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer",
-                  fontWeight: 800,
-                  fontSize: "13px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                  fontFamily: "inherit",
-                }}
-              >
-                Найти
-              </button>
-            </div>
+
           </div>
           <div className="hero-img" style={{ backgroundImage: `url("https://cdn.poehali.dev/projects/e50bf7dd-7c47-46aa-8325-68733306fc28/files/81833cb6-e713-40d4-b716-109bc8aebbd6.jpg")` }}>
             <div className="sticker">
