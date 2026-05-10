@@ -282,7 +282,7 @@ export default function Catalog() {
       <div className="grain-overlay" />
 
       <header className="header">
-        <div className="logo">ЧАЙ*ХАУ</div>
+        <div className="logo">ПУЭРчик</div>
         <nav>
           <a href="/">Главная</a>
           <a href="/catalog">Каталог</a>
@@ -419,7 +419,7 @@ export default function Catalog() {
 
       <footer>
         <div>
-          <div className="footer-logo">ЧАЙ*ХАУ</div>
+          <div className="footer-logo">ПУЭРчик</div>
           <p style={{ color: "#666", lineHeight: 1.6 }}>
             Редкие сорта чая со всего мира — прямо к вашей двери.
           </p>
@@ -442,7 +442,7 @@ export default function Catalog() {
           </ul>
         </div>
         <div className="footer-bottom">
-          <span>2025 ЧАЙ*ХАУ</span>
+          <span>2025 ПУЭРчик</span>
           <span>ВКУС НАСТОЯЩЕГО</span>
           <span>IG / TG / VK</span>
         </div>
